@@ -1,0 +1,40 @@
+.search_content {
+  height: 100vh;
+}
+
+.search_container {
+  height: 100%;
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.tour {
+  flex: 1 1 auto;
+  display: inline-block;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.tour_column_img {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.tour_column_img:hover {
+  transform: scale(1.05);
+}
+
+.tour_img {
+  width: 500px;
+  height: 300px;
+  border-radius: 5px;
+}
+
+.no_results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  height: 100%;
+  padding: 8rem;
+}
