@@ -48,13 +48,17 @@ const DetailModal = ({
               tel ? tel : "연락처 없음"
             }`}</p>
             <div className="modal_overview">
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: overViewData
-                    .replace(/<br \/>/g, "<br />")
-                    .replace(/\n/g, "<br />"),
-                }}
-              ></p>
+              {!overViewData ? (
+                "Loading..."
+              ) : (
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: overViewData
+                      .replace(/<br \/>/g, "<br />")
+                      .replace(/\n/g, "<br />"),
+                  }}
+                ></p>
+              )}
             </div>
           </div>
         </div>
