@@ -25,7 +25,7 @@
   color: white;
 }
 
-.modal_content {
+.modal_content, modal_overview {
   padding: 40px;
   color: white;
 }
