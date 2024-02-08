@@ -47,15 +47,15 @@ const DetailModal = ({
             <p className="modal_tel">{`연락처: ${
               tel ? tel : "연락처 없음"
             }`}</p>
-            <br />
-            <p
-              className="modal_overview"
-              dangerouslySetInnerHTML={{
-                __html: overViewData
-                  .replace(/<br \/>/g, "<br />")
-                  .replace(/\n/g, "<br />"),
-              }}
-            ></p>
+            <div className="modal_overview">
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: overViewData
+                    .replace(/<br \/>/g, "<br />")
+                    .replace(/\n/g, "<br />"),
+                }}
+              ></p>
+            </div>
           </div>
         </div>
       </div>
