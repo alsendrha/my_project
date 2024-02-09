@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchPage.css";
 import { useDebounce } from "../../hooks/useDebounce";
+import { apiKey, baseUrl, searchNumOfRows } from "../../api/api";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -25,7 +26,7 @@ const SearchPage = () => {
   const fetchTour = async () => {
     try {
       const response = await axios.get(
-        `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=D6HvbqfFj6otDTGY3883h0C51xIplWlMUXEF%2Bl5ZX9DTpTTNODdcI%2F6StO1BbYtjTAtOOKyj25hhnMVj4ASszw%3D%3D&numOfRows=60&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=${debouncedSearchTerm}`
+        `${baseUrl}searchKeyword1?serviceKey=${apiKey}&numOfRows=${searchNumOfRows}&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=${debouncedSearchTerm}`
       );
       setSearchResults(response.data.response.body.items.item);
     } catch (error) {

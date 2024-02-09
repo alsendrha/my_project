@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./DetailPage.css";
 import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { apiKey, baseUrl } from "../../api/api";
 
 const DetailPage = () => {
   const location = useLocation();
   const dataInfo = { ...location.state };
   const [detailContent, setDetailContent] = useState("");
-  const APIS_KEY =
-    "D6HvbqfFj6otDTGY3883h0C51xIplWlMUXEF%2Bl5ZX9DTpTTNODdcI%2F6StO1BbYtjTAtOOKyj25hhnMVj4ASszw%3D%3D";
   const containerStyle = {
     width: "700px",
     height: "400px",
@@ -20,7 +19,7 @@ const DetailPage = () => {
   useEffect(() => {
     async function fetchData() {
       const response2 = await axios.get(
-        `https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=${APIS_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${dataInfo.contentid}&contentTypeId=12&defaultYN=Y&overviewYN=Y&numOfRows=1&pageNo=1`
+        `${baseUrl}detailCommon1?serviceKey=${apiKey}&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${dataInfo.contentid}&contentTypeId=12&defaultYN=Y&overviewYN=Y&numOfRows=1&pageNo=1`
       );
       setDetailContent(response2.data.response.body.items.item[0].overview);
     }

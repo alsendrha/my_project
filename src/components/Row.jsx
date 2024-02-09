@@ -2,6 +2,7 @@ import axios from "axios";
 import "./Row.css";
 import DetailModal from "./Modal";
 import { useEffect, useState } from "react";
+import { apiKey, baseUrl, numOfRows } from "../api/api";
 const Row = ({ city }) => {
   const [dataInfo, setDataInfo] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -13,13 +14,13 @@ const Row = ({ city }) => {
   };
 
   useEffect(() => {
-    getData(city);
+    getData();
   }, []);
 
   const getData = async () => {
     try {
       const response = await axios.get(
-        `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=D6HvbqfFj6otDTGY3883h0C51xIplWlMUXEF%2Bl5ZX9DTpTTNODdcI%2F6StO1BbYtjTAtOOKyj25hhnMVj4ASszw%3D%3D&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=${city}`
+        `${baseUrl}searchKeyword1?serviceKey=${apiKey}&numOfRows=${numOfRows}&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=${city}`
       );
       setDataInfo(response.data.response.body.items.item);
       console.log(response.data.response.body.items.item);

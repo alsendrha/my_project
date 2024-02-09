@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./Modal.css";
 import useOnclickOutside from "../../hooks/useOnClickOutside";
 import axios from "axios";
+import { apiKey, baseUrl } from "../../api/api";
 const DetailModal = ({
   addr1,
   addr2,
@@ -23,7 +24,7 @@ const DetailModal = ({
 
   const overView = async () => {
     const response = await axios.get(
-      `https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=D6HvbqfFj6otDTGY3883h0C51xIplWlMUXEF%2Bl5ZX9DTpTTNODdcI%2F6StO1BbYtjTAtOOKyj25hhnMVj4ASszw%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${contentid}&contentTypeId=12&defaultYN=Y&overviewYN=Y&numOfRows=1&pageNo=1`
+      `${baseUrl}detailCommon1?serviceKey=${apiKey}&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${contentid}&contentTypeId=12&defaultYN=Y&overviewYN=Y&numOfRows=1&pageNo=1`
     );
     setOverViewData(response.data.response.body.items.item[0].overview);
   };
