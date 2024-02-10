@@ -21,13 +21,14 @@ const DetailPage = () => {
       const response2 = await axios.get(
         `${baseUrl}detailCommon1?serviceKey=${apiKey}&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${dataInfo.contentid}&contentTypeId=12&defaultYN=Y&overviewYN=Y&numOfRows=1&pageNo=1`
       );
-      setDetailContent(response2.data.response.body.items.item[0].overview);
+      console.log(response2.data.response.body.items.item[0]);
+      setDetailContent(response2.data.response.body.items.item[0]);
     }
     fetchData();
   }, []);
 
-  if (dataInfo === null) return null;
-
+  if (dataInfo === null || detailContent === null) return null;
+  console.log(detailContent.homepage);
   return (
     <div className="detail_background">
       <div className="detail_container">
@@ -58,18 +59,35 @@ const DetailPage = () => {
               <div className="data_text">
                 <p>{`주소: ${dataInfo.addr1} ${dataInfo.addr2}`}</p>
                 <br />
+                <div>
+                  <p>
+                    {`페이지 바로 가기: `}
+                    {detailContent.homepage ? (
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: detailContent.homepage,
+                        }}
+                      ></span>
+                    ) : (
+                      <span>정보 없음</span>
+                    )}
+                  </p>
+                </div>
+                <br />
                 <h4>상세정보</h4>
                 <div
                   style={{ width: "650px", margin: "auto", textAlign: "start" }}
                 >
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: detailContent
-                        .replace(/<br \/>/g, "<br />")
-                        .replace(/\n/g, "<br />"),
-                    }}
-                  ></p>
-                  {/* <p>{detailContent.replace('<br />', '')}</p> */}
+                  {typeof detailContent === "object" &&
+                    detailContent.overview && (
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: detailContent.overview
+                            .replace(/<br \/>/g, "<br />")
+                            .replace(/\n/g, "<br />"),
+                        }}
+                      ></p>
+                    )}
                 </div>
               </div>
               <br />

@@ -1,9 +1,8 @@
-import NavBar from '../../components/NavBar'
-import MainScreen from '../../components/MainScreen'
-import Row from '../../components/Row'
+import MainScreen from "../../components/MainScreen";
+import Row from "../../components/Row";
 
 const MainContainer = () => {
-  const city = ['서울', '경기', '인천', '강원'];
+  const city = ["서울", "경기", "인천", "강원"];
   return (
     <div>
       <MainScreen />
@@ -12,7 +11,7 @@ const MainContainer = () => {
       <Row city={city[2]} />
       <Row city={city[3]} />
     </div>
-  )
-}
+  );
+};
 
-export default MainContainer
+export default MainContainer;
