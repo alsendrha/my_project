@@ -47,7 +47,10 @@ const NavBar = () => {
         <Login onClick={() => (window.location.href = "login")}>로그인</Login>
       ) : (
         <SignOut>
-          <UserImg src={userData.photoURL} alt={userData.displayName} />
+          <UserImg
+            src={userData.photoURL ? userData.photoURL : "/images/no_img.jpg"}
+            alt={userData.displayName}
+          />
           <DropDown>
             <span onClick={handleLogOut}>Sign Out</span>
           </DropDown>
