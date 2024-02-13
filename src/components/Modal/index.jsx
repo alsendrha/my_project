@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Modal.css";
 import useOnclickOutside from "../../hooks/useOnClickOutside";
-import axios from "axios";
-import { apiKey, baseUrl } from "../../api/api";
+import axios from "../../api/detailApi";
 const DetailModal = ({
   addr1,
   addr2,
@@ -23,9 +22,12 @@ const DetailModal = ({
   }, []);
 
   const overView = async () => {
-    const response = await axios.get(
-      `${baseUrl}detailCommon1?serviceKey=${apiKey}&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${contentid}&contentTypeId=12&defaultYN=Y&overviewYN=Y&numOfRows=1&pageNo=1`
-    );
+    const response = await axios.get("", {
+      params: {
+        contentId: contentid,
+      },
+    });
+    console.log(response.data);
     setOverViewData(response.data.response.body.items.item[0].overview);
   };
   return (

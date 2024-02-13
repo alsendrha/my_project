@@ -1,9 +1,8 @@
-import axios from "axios";
+import axios from "../../api/detailApi";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./DetailPage.css";
 import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
-import { apiKey, baseUrl } from "../../api/api";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -18,9 +17,11 @@ const DetailPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response2 = await axios.get(
-        `${baseUrl}detailCommon1?serviceKey=${apiKey}&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${dataInfo.contentid}&contentTypeId=12&defaultYN=Y&overviewYN=Y&numOfRows=1&pageNo=1`
-      );
+      const response2 = await axios.get("", {
+        params: {
+          contentId: dataInfo.contentid,
+        },
+      });
       console.log(response2.data.response.body.items.item[0]);
       setDetailContent(response2.data.response.body.items.item[0]);
     }

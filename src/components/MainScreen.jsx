@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import "./MainScreen.css";
-import { apiKey, baseUrl } from "../api/api";
-import axios from "axios";
+import axios from "../api/api";
 
 const MainScreen = () => {
   const [mainScreen, setMainScreen] = useState([]);
   useEffect(() => {
     const mainImage = async () => {
       try {
-        const response = await axios.get(
-          `${baseUrl}searchKeyword1?serviceKey=${apiKey}&numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=서울`
-        );
+        const response = await axios.get("", {
+          params: {
+            numOfRows: 100,
+            keyword: "서울",
+          },
+        });
         const imageData = response.data.response.body.items.item;
         const images = imageData
           .filter((item) => item.firstimage)

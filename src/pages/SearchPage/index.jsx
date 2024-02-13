@@ -1,9 +1,8 @@
-import axios from "axios";
+import axios from "../../api/api";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchPage.css";
 import { useDebounce } from "../../hooks/useDebounce";
-import { apiKey, baseUrl, searchNumOfRows } from "../../api/api";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -25,9 +24,12 @@ const SearchPage = () => {
 
   const fetchTour = async () => {
     try {
-      const response = await axios.get(
-        `${baseUrl}searchKeyword1?serviceKey=${apiKey}&numOfRows=${searchNumOfRows}&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=${debouncedSearchTerm}`
-      );
+      const response = await axios.get("", {
+        params: {
+          numOfRows: 60,
+          keyword: debouncedSearchTerm,
+        },
+      });
       setSearchResults(response.data.response.body.items.item);
     } catch (error) {
       console.log("에러입니다.", error);

@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from "../api/api";
 import "./Row.css";
 import DetailModal from "./Modal";
 import { useEffect, useState } from "react";
-import { apiKey, baseUrl, numOfRows } from "../api/api";
+
 const Row = ({ city }) => {
   const [dataInfo, setDataInfo] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,9 +19,12 @@ const Row = ({ city }) => {
 
   const getData = async () => {
     try {
-      const response = await axios.get(
-        `${baseUrl}searchKeyword1?serviceKey=${apiKey}&numOfRows=${numOfRows}&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=${city}`
-      );
+      const response = await axios.get("", {
+        params: {
+          numOfRows: 20,
+          keyword: city,
+        },
+      });
       setDataInfo(response.data.response.body.items.item);
       console.log(response);
     } catch (error) {
