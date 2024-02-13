@@ -22,7 +22,16 @@ const MainContainer = () => {
   ];
   return (
     <div>
-      <MainScreen />
+      <div
+        style={{
+          backgroundImage: "url(/images/main_image.jpg)",
+          backgroundSize: "cover",
+          height: "700px",
+          marginBottom: "120px",
+        }}
+      >
+        <MainScreen />
+      </div>
       {city.map((item) => {
         return <Row key={item} city={item} />;
       })}
