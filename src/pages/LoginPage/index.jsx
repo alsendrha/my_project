@@ -41,9 +41,20 @@ const LoginPage = () => {
   return (
     <Container>
       <Center>
-        <Logo src="/images/google_2_500.png" alt="로고" />
-        <HeadingText>Sign in with your Google ID</HeadingText>
-        <Button onClick={() => handleAuth()}>google ID</Button>
+        <HeadingText>이메일 로그인하세요</HeadingText>
+        <Description>
+          한국 관광지에 대한 모든걸 간단한 로그인을 통해 확인해보아요
+        </Description>
+        <Button>이메일</Button>
+        <LinkText>회원가입</LinkText>
+        <LinkText>이메일/비밀번호를 잃어버렸어요</LinkText>
+        <Logo
+          src="/images/google_2_500.png"
+          alt="로고"
+          onClick={() => handleAuth()}
+        />
+        {/* <HeadingText>Sign in with your Google ID</HeadingText> */}
+        {/* <Button onClick={() => handleAuth()}>google ID</Button> */}
       </Center>
     </Container>
   );
@@ -57,6 +68,17 @@ const Container = styled.section`
   height: 100vh;
 `;
 
+const Description = styled.p`
+  margin: 0;
+  font-size: 1.3rem;
+`;
+
+const LinkText = styled.p`
+  font-size: 1.2rem;
+  color: #2997ff;
+  margin: 2rem 0 0 0;
+`;
+
 const Center = styled.div`
   max-width: 650px;
   width: 100%;
@@ -66,8 +88,10 @@ const Center = styled.div`
 `;
 
 const Logo = styled.img`
-  margin-bottom: 1.3rem;
-  width: 100px;
+  margin: 1rem 0 0 0;
+  /* margin-bottom: 1.3rem; */
+  width: 50px;
+  cursor: pointer;
 `;
 
 const HeadingText = styled.h1`
@@ -76,7 +100,7 @@ const HeadingText = styled.h1`
 
 const Button = styled.a`
   margin-top: 1rem;
-  margin-bottom: 8rem;
+  /* margin-bottom: 8rem; */
   font-size: 18px;
   padding: 1rem;
   border: 1px solid transparent;

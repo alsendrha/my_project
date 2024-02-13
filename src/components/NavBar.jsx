@@ -32,7 +32,7 @@ const NavBar = () => {
     <NavWrapper>
       <Logo>
         <img
-          src="/images/logo.png"
+          src="/images/korea.png"
           onClick={() => (window.location.href = "/")}
         />
       </Logo>
