@@ -29,7 +29,9 @@ const LoginPage = () => {
       localStorage.setItem("userData", JSON.stringify(user));
       console.log(user);
     } catch (error) {
-      if (error.code === "auth/invalid-email") {
+      if (!email && !password) {
+        alert("이메일과 비밀번호를 입력해주세요");
+      } else if (error.code === "auth/invalid-email") {
         alert("이메일 형식이 잘못되었습니다.");
       } else if (error.code === "auth/email-already-in-use") {
         alert("사용중인 아이디입니다.");
@@ -49,8 +51,12 @@ const LoginPage = () => {
       alert("로그인 성공");
       console.log(user);
     } catch (error) {
-      alert("잘못된 아이디 또는 비밀번호가 틀렸습니다.");
-      console.log(error.message);
+      if (!email && !password) {
+        alert("이메일과 비밀번호를 입력해주세요");
+      } else {
+        alert("잘못된 아이디 또는 비밀번호가 틀렸습니다.");
+        console.log(error.message);
+      }
     }
   };
 

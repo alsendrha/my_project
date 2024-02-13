@@ -23,7 +23,7 @@ const Row = ({ city }) => {
         `${baseUrl}searchKeyword1?serviceKey=${apiKey}&numOfRows=${numOfRows}&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=12&keyword=${city}`
       );
       setDataInfo(response.data.response.body.items.item);
-      console.log(response.data.response.body.items.item);
+      console.log(response);
     } catch (error) {
       console.log("error입니다,", error);
     }
