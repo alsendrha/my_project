@@ -23,8 +23,8 @@ const MainContainer = () => {
   return (
     <div>
       <MainScreen />
-      {city.map((item, index) => {
-        return <Row key={index} city={item} />;
+      {city.map((item) => {
+        return <Row key={item} city={item} />;
       })}
     </div>
   );
