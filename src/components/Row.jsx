@@ -32,9 +32,7 @@ const Row = ({ city }) => {
           keyword: city,
         },
       });
-      console.log(response.data);
       setDataInfo(response.data.response.body.items.item);
-      console.log(response);
     } catch (error) {
       console.log("error입니다,", error);
     }
