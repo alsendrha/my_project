@@ -9,7 +9,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-// import styled from "styled-components";
 
 const Row = ({ city }) => {
   const [dataInfo, setDataInfo] = useState([]);
@@ -41,7 +40,7 @@ const Row = ({ city }) => {
   };
 
   return (
-    <div>
+    <div style={{ padding: "0 26px 0 26px", overflow: "hidden" }}>
       <h3 className="row_title">{city}</h3>
       <Swiper
         // install Swiper modules
@@ -74,7 +73,7 @@ const Row = ({ city }) => {
           <div id={city} className="row_posters">
             {dataInfo.map((item) => (
               <SwiperSlide key={item.contentid}>
-                <div style={{ display: "inline-block", marginTop: "20px" }}>
+                <div style={{ marginTop: "20px", marginLeft: "10px" }}>
                   <img
                     className="row_poster"
                     src={
