@@ -35,7 +35,12 @@
   padding: 20px 0 0 0;
   color: white;
   overflow: hidden;
+}
+
+.modal_overview p{
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .modal_title {
@@ -58,8 +63,9 @@
 .modal {
   position: relative;
   max-width: 800px;
-  background-color: #636363f5;
+  background-color: rgba(88, 88, 88, 0.75);
   overflow: hidden;
+  text-overflow: ellipsis;
   border-radius: 8px;
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
