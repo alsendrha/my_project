@@ -87,6 +87,7 @@
   margin-right: 10px;
   transition: transform 450ms;
   border-radius: 8px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .row_main_title {
@@ -105,4 +106,33 @@
 .row_poster:hover {
   transform: scale(1.05);
   opacity: 1;
+}
+
+.swiper-slide{
+  width: 260px !important;
+}
+
+.swiper-pagination {
+  text-align: right !important;
+}
+
+.swiper-pagination-bullet {
+  background: gray !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: black !important;
+  opacity: 0.1 !important;
+}
+
+.swiper-button-prev {
+  color: gray !important;
+}
+
+.swiper-button-next {
+  color: gray !important;
+}
+.swiper-scrollbar{
+  display: none !important;
 }
