@@ -1,8 +1,8 @@
-import axios from "../../api/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./SearchPage.css";
+import axios from "../../api/api";
 import { useDebounce } from "../../hooks/useDebounce";
+import "./SearchPage.css";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -11,15 +11,34 @@ const SearchPage = () => {
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
-
+  const [page, setPage] = useState(1);
+  const divElement = useRef(null);
   let query = useQuery();
   const searchTerm = query.get("keyword");
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+  const [hashMore, setHashMore] = useState(true);
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
+  const interception = (entries) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      fetchTour();
+    }
+  };
+  useEffect(() => {
+    const interceptor = new IntersectionObserver(interception);
+    if (interception && searchResults.length > 0) {
+      interceptor.observe(divElement.current);
+    }
+    return () => {
+      interceptor.disconnect();
+    };
+  }, [page]);
 
   useEffect(() => {
-    if (debouncedSearchTerm) {
-      fetchTour(debouncedSearchTerm);
-    }
+    setPage(1);
+    setSearchResults([]);
+    setHashMore(true);
+    fetchTour(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
 
   const fetchTour = async () => {
@@ -27,10 +46,23 @@ const SearchPage = () => {
       const response = await axios.get("", {
         params: {
           numOfRows: 60,
+          pageNo: page,
           keyword: debouncedSearchTerm,
         },
       });
-      setSearchResults(response.data.response.body.items.item);
+      if (
+        !response.data.response.body.items.item ||
+        response.data.response.body.items.item.length === 0
+      ) {
+        setHashMore(false);
+      } else {
+        setSearchResults((prev) => [
+          ...prev,
+          ...response.data.response.body.items.item,
+        ]);
+        console.log(response.data.response.body.items.item);
+        setPage((prev) => prev + 1);
+      }
     } catch (error) {
       console.log("에러입니다.", error);
     }
@@ -68,6 +100,8 @@ const SearchPage = () => {
             </div>
           </div>
         ))}
+        {!hashMore && <div>더이상 검색결과가 없습니다.</div>}
+        <div ref={divElement} style={{ height: "10px" }}></div>
       </section>
     );
   } else {
@@ -75,6 +109,7 @@ const SearchPage = () => {
       <section className="no_results">
         <div className="no_results_text">
           <p>찾고자하는 검색어 {debouncedSearchTerm} 관광지가 없습니다.</p>
+          <div ref={divElement} style={{ height: "10px" }}></div>
         </div>
       </section>
     );

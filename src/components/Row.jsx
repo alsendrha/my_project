@@ -1,9 +1,9 @@
-import axios from "../api/api";
-import "./Row.css";
-import DetailModal from "./Modal";
 import { useEffect, useState } from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import axios from "../api/api";
+import DetailModal from "./Modal";
+import "./Row.css";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -29,6 +29,7 @@ const Row = ({ city }) => {
       const response = await axios.get("", {
         params: {
           numOfRows: 20,
+          pageNo: 1,
           keyword: city,
         },
       });
